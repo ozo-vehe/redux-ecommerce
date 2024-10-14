@@ -6,6 +6,11 @@
 
 This project aims to create a scalable, performant, and easy-to-use eCommerce system that supports multiple user roles and offers seamless product management and purchasing capabilities.
 
+## Demo
+
+- Video: [Video](https://www.loom.com/share/9b5711ecf89e4060a10277d2ff57f9b8?sid=29d11325-20fb-41e6-bf42-df306dcf7b2c)
+- Website: [StoRedux](https://storedux-ten.vercel.app/)
+
 ## Features
 
 1. **User Registration & Role Assignment**  
