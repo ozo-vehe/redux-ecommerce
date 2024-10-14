@@ -33,15 +33,13 @@ export default function Navbar() {
       name: "About Us",
       link: "/about",
     },
-    {
-      name: "Profile",
-      link: "/profile",
-    },
   ];
 
   const removeCart = (productId) => {
     console.log(loggedUser.id);
-    dispatch(removeFromCart({productId: productId.id, userId: loggedUser.id}));
+    dispatch(
+      removeFromCart({ productId: productId.id, userId: loggedUser.id })
+    );
   };
 
   const handleLogout = () => {
@@ -72,24 +70,36 @@ export default function Navbar() {
               </NavLink>
             </li>
           ))}
-          <li className="hover:text-custom-blue">
-            {loggedUser?.role === "admin" && (
+          {loggedUser?.id && (
+            <li className="hover:text-custom-blue">
+              <NavLink
+                className={({ isActive }) => isActive && "text-custom-blue"}
+                to={"/profile"}
+              >
+                Profile
+              </NavLink>
+            </li>
+          )}
+          {loggedUser?.role === "admin" && (
+            <li className="hover:text-custom-blue">
               <NavLink
                 className={({ isActive }) => isActive && "text-custom-blue"}
                 to={"/dashboard"}
               >
                 Dashboard
               </NavLink>
-            )}
-            {loggedUser?.role === "seller" && (
+            </li>
+          )}
+          {loggedUser?.role === "seller" && (
+            <li className="hover:text-custom-blue">
               <NavLink
                 className={({ isActive }) => isActive && "text-custom-blue"}
                 to={"/add-product"}
               >
                 Upload Product
               </NavLink>
-            )}
-          </li>
+            </li>
+          )}
         </ul>
       </div>
 
