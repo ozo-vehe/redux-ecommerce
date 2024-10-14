@@ -167,6 +167,20 @@ export const removeFromCart = createAsyncThunk(
 );
 
 
+export const deleteCartItems = createAsyncThunk(
+  "users/deleteCartItems",
+  async (userId) => {
+    const { error } = await supabase
+      .from("carts")
+      .delete()
+      .eq("user_id", userId);
+
+    if (error) throw new Error(error.message);
+    
+    return userId;
+  }
+);
+
 const cartSlice = createSlice({
   name: "cart",
   initialState,
@@ -212,6 +226,9 @@ const cartSlice = createSlice({
       })
       .addCase(removeFromCart.fulfilled, (state, action) => {
         state.cartItems = action.payload;
+      })
+      .addCase(deleteCartItems.fulfilled, (state) => {
+        state.cartItems = [];
       });
   },
 });

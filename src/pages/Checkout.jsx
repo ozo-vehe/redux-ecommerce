@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { signedUser } from '../features/users/usersSlice';
-import {clearCart, getCartItems} from '../features/cart/cartSlice';
+import {clearCart, deleteCartItems, getCartItems} from '../features/cart/cartSlice';
 
 const Checkout = () => {
   const [totalPrice, setTotalPrice] = useState();
@@ -61,6 +61,7 @@ const Checkout = () => {
     });
     // Handle form submission logic here
     dispatch(clearCart());
+    dispatch(deleteCartItems(user.id))
     console.log('Form submitted:', formData);
   };
 
