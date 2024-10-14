@@ -1,14 +1,7 @@
 import Product from "../components/Product";
-// import { products } from "../utils/products";
 import { useSelector } from "react-redux";
 
 export default function Products() {
-  // const categories = [
-  //   "electronics",
-  //   "jewelery",
-  //   "men's clothing",
-  //   "women's clothing",
-  // ];
   const categories = useSelector((state) => state.products.categories);
   const products = useSelector((state) => state.products.products);
 

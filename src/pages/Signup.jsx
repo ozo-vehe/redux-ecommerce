@@ -1,10 +1,28 @@
+/**
+ * Signup Component
+ *
+ * This component renders a signup form for user registration.
+ *
+ * @component
+ * @example
+ * return (
+ *   <Signup />
+ * )
+ */
+
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { addNewUser, userLoading, signedUser, setUser } from "../features/users/usersSlice";
+import {
+  addNewUser,
+  userLoading,
+  signedUser,
+  setUser,
+} from "../features/users/usersSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { v4 } from "uuid";
 
 const Signup = () => {
+  // State variables
   const [fullname, setFullname] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -13,11 +31,18 @@ const Signup = () => {
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState();
 
+  // Redux hooks
   const dispatch = useDispatch();
   const loading = useSelector((state) => userLoading(state));
   const loggedUser = useSelector((state) => signedUser(state));
+
+  // React Router hook
   const navigate = useNavigate();
 
+  /**
+   * Handles form submission
+   * @param {Event} e - The form submission event
+   */
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -38,28 +63,27 @@ const Signup = () => {
 
       dispatch(addNewUser(userDetails));
 
-      if(!isLoading) {
-        // dispatch(setUser({email, password}));
-        // console.log(loggedUser)
-        // localStorage.setItem("user", JSON.stringify(userDetails))
-        navigate('/login');
+      if (!isLoading) {
+        navigate("/login");
       }
-
     } catch (err) {
       setError("Failed to sign up. Please try again.");
     }
   };
 
+  /**
+   * Effect to update loading state and user
+   */
   useEffect(() => {
-    const loadingState = async() => {
-      console.log(loading)
+    const loadingState = async () => {
+      console.log(loading);
       setIsLoading(loading);
       setUser(loggedUser);
       console.log(loggedUser);
-    }
+    };
 
     loadingState();
-  }, [loading, loggedUser])
+  }, [loading, loggedUser]);
 
   return (
     <div className="min-h-[80vh] flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
@@ -181,19 +205,6 @@ const Signup = () => {
           </div>
         </form>
 
-        {/* <div className="flex flex-col gap-1">
-          <button
-            type="submit"
-            className="group relative w-full flex justify-center py-2 px-4 rounded-md bg-white border border-gray-200 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 transition-all duration-300"
-            onClick={handleGoogleSignin}
-          >
-            <img
-              className="w-[23px] h-[23px]"
-              src="https://img.icons8.com/fluency/48/google-logo.png"
-              alt="google-logo"
-            />
-          </button>
-        </div> */}
         {error && (
           <p className="mt-2 text-center text-sm text-red-600">{error}</p>
         )}

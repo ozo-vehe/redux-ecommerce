@@ -1,84 +1,130 @@
-import { useState, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { signedUser } from '../features/users/usersSlice';
-import {clearCart, deleteCartItems, getCartItems} from '../features/cart/cartSlice';
+/**
+ * Checkout Component
+ *
+ * This component renders a checkout page for an e-commerce application.
+ * It displays a form for shipping and payment information, and handles the checkout process.
+ *
+ * @component
+ * @example
+ * return (
+ *   <Checkout />
+ * )
+ */
+
+import { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { signedUser } from "../features/users/usersSlice";
+import {
+  clearCart,
+  deleteCartItems,
+  getCartItems,
+} from "../features/cart/cartSlice";
 
 const Checkout = () => {
+  // State for total price
   const [totalPrice, setTotalPrice] = useState();
+
+  // Redux selectors and dispatch
   const user = useSelector((state) => signedUser(state));
   const cartItems = useSelector((state) => getCartItems(state));
-
   const dispatch = useDispatch();
 
+  // Form data state
   const [formData, setFormData] = useState({
     name: user.name,
     email: user.email,
-    address: '',
-    city: '',
-    country: '',
-    zip: '',
-    cardNumber: '',
-    expiryDate: '',
-    cvv: '',
+    address: "",
+    city: "",
+    country: "",
+    zip: "",
+    cardNumber: "",
+    expiryDate: "",
+    cvv: "",
   });
-  
 
+  /**
+   * Handles changes in form inputs
+   * @param {Object} e - Event object
+   */
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  /**
+   * Handles form submission
+   * @param {Object} e - Event object
+   */
   const handleSubmit = (e) => {
     e.preventDefault();
+    // Form validation logic
     if (!cartItems.length) {
-      alert('Please add items to cart');
+      alert("Please add items to cart");
       return;
     }
-    if(!formData.name || !formData.email || !formData.address || !formData.city || !formData.country || !formData.zip || !formData.cardNumber || !formData.expiryDate || !formData.cvv) {
-      alert('Please fill in all fields');
+    if (
+      !formData.name ||
+      !formData.email ||
+      !formData.address ||
+      !formData.city ||
+      !formData.country ||
+      !formData.zip ||
+      !formData.cardNumber ||
+      !formData.expiryDate ||
+      !formData.cvv
+    ) {
+      alert("Please fill in all fields");
       return;
     }
-    if(formData.cardNumber.length < 15) {
-      alert('Please enter a valid card number');
+    if (formData.cardNumber.length < 15) {
+      alert("Please enter a valid card number");
       return;
     }
-    if(formData.cvv.length !== 3) {
-      alert('Please enter a valid CVV');
+    if (formData.cvv.length !== 3) {
+      alert("Please enter a valid CVV");
       return;
     }
 
-    alert('Order placed successfully');
+    // Order placement logic
+    alert("Order placed successfully");
 
+    // Reset form data
     setFormData({
       name: user.name,
       email: user.email,
-      address: '',
-      city: '',
-      country: '',
-      zip: '',
-      cardNumber: '',
-      expiryDate: '',
-      cvv: '',
+      address: "",
+      city: "",
+      country: "",
+      zip: "",
+      cardNumber: "",
+      expiryDate: "",
+      cvv: "",
     });
-    // Handle form submission logic here
+
+    // Clear cart and delete cart items
     dispatch(clearCart());
-    dispatch(deleteCartItems(user.id))
-    console.log('Form submitted:', formData);
+    dispatch(deleteCartItems(user.id));
+    console.log("Form submitted:", formData);
   };
 
-
+  /**
+   * Calculates and sets the total price of items in the cart
+   */
   useEffect(() => {
     const getTotalPrice = () => {
-      const price = cartItems.reduce((acc, curr) => acc + curr.price * curr.quantity, 0).toFixed(2)
+      const price = cartItems
+        .reduce((acc, curr) => acc + curr.price * curr.quantity, 0)
+        .toFixed(2);
       setTotalPrice(price);
-    }
+    };
     getTotalPrice();
-  }, [cartItems])
+  }, [cartItems]);
 
   return (
     <div className="container mx-auto px-4 py-8">
       <h1 className="text-3xl font-bold mb-8">Checkout</h1>
       <p>Total price: {totalPrice}</p>
       <form onSubmit={handleSubmit} className="max-w-lg mx-auto">
+        {/* Shipping Information Section */}
         <div className="mb-6">
           <h2 className="text-xl font-semibold mb-4">Shipping Information</h2>
           <div className="grid grid-cols-1 gap-4">
@@ -140,6 +186,7 @@ const Checkout = () => {
             />
           </div>
         </div>
+        {/* Payment Information Section */}
         <div className="mb-6">
           <h2 className="text-xl font-semibold mb-4">Payment Information</h2>
           <div className="grid grid-cols-1 gap-4">

@@ -1,43 +1,90 @@
-import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Link } from 'react-router-dom';
-import { setUser, signedUser } from '../features/users/usersSlice';
-import { fetchUserCart } from '../features/cart/cartSlice';
-import { useDispatch, useSelector } from 'react-redux';
+/**
+ * Login Component
+ *
+ * This component renders a login form and handles user authentication.
+ *
+ * @component
+ * @example
+ * return (
+ *   <Login />
+ * )
+ */
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { setUser, signedUser } from "../features/users/usersSlice";
+import { fetchUserCart } from "../features/cart/cartSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 const Login = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  /**
+   * State for email input
+   * @type {[string, function]}
+   */
+  const [email, setEmail] = useState("");
+
+  /**
+   * State for password input
+   * @type {[string, function]}
+   */
+  const [password, setPassword] = useState("");
+
+  /**
+   * State for logged in user details
+   * @type {[object, function]}
+   */
   const [loggedUser, setLoggedUser] = useState({});
-  const [error, setError] = useState('');
+
+  /**
+   * State for error messages
+   * @type {[string, function]}
+   */
+  const [error, setError] = useState("");
+
+  /**
+   * Hook for programmatic navigation
+   */
   const navigate = useNavigate();
 
+  /**
+   * Selector to get signed user details from Redux store
+   */
   const signedUserDetails = useSelector((state) => signedUser(state));
 
+  /**
+   * Hook to dispatch actions to Redux store
+   */
   const dispatch = useDispatch();
 
+  /**
+   * Handles form submission
+   * @param {Event} e - The submit event
+   */
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError('');
+    setError("");
     try {
-      dispatch(setUser({email, password}));
+      dispatch(setUser({ email, password }));
     } catch (err) {
-      setError('Failed to log in. Please check your credentials.');
+      setError("Failed to log in. Please check your credentials.");
     }
   };
 
+  /**
+   * Effect to handle user authentication and navigation
+   */
   useEffect(() => {
-    setLoggedUser(signedUserDetails)
-    if(signedUserDetails?.id) {
-      dispatch(fetchUserCart(signedUserDetails.id))
+    setLoggedUser(signedUserDetails);
+    if (signedUserDetails?.id) {
+      dispatch(fetchUserCart(signedUserDetails.id));
       localStorage.setItem("user", JSON.stringify(signedUserDetails));
-      if(signedUserDetails?.role === 'admin') {
-        navigate('/dashboard')
+      if (signedUserDetails?.role === "admin") {
+        navigate("/dashboard");
       } else {
-        navigate('/')
+        navigate("/");
       }
     }
-  }, [signedUserDetails])
+  }, [signedUserDetails, dispatch, navigate]);
 
   return (
     <div className="min-h-[80vh] flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
@@ -92,13 +139,19 @@ const Login = () => {
                 type="checkbox"
                 className="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
               />
-              <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-900">
+              <label
+                htmlFor="remember-me"
+                className="ml-2 block text-sm text-gray-900"
+              >
                 Remember me
               </label>
             </div>
 
             <div className="text-sm">
-              <a href="#" className="font-medium text-indigo-600 hover:text-indigo-500">
+              <a
+                href="#"
+                className="font-medium text-indigo-600 hover:text-indigo-500"
+              >
                 Forgot your password?
               </a>
             </div>
@@ -113,12 +166,23 @@ const Login = () => {
             </button>
           </div>
 
-          <div className='text-center font-[600]'>
-            <p>Have an account? <Link className='text-indigo-600' to="/signup">Signup</Link></p>
+          <div className="text-center font-[600]">
+            <p>
+              Have an account?{" "}
+              <Link className="text-indigo-600" to="/signup">
+                Signup
+              </Link>
+            </p>
           </div>
         </form>
-        {error && <p className="mt-2 text-center text-sm text-red-600">{error}</p>}
-        {loggedUser?.length < 1 && <p className="mt-2 text-center text-sm text-red-600">{"User not found"}</p>}
+        {error && (
+          <p className="mt-2 text-center text-sm text-red-600">{error}</p>
+        )}
+        {loggedUser?.length < 1 && (
+          <p className="mt-2 text-center text-sm text-red-600">
+            {"User not found"}
+          </p>
+        )}
       </div>
     </div>
   );
