@@ -24,7 +24,7 @@ const Profile = () => {
     <div className="container mx-auto py-8 max-w-[1440px] px-[5%] min-h-[80vh]">
       <div className="bg-white shadow-md rounded-lg p-6">
         <div className="flex gap-2 items-center mb-6">
-          <p className="border border-gray-200 text-[44px] text-indigo-600 rounded-full w-20 h-20 flex items-center justify-center text-xl font-[800] hover:bg-indigo-600 hover:text-white transition-all duration-300 ease-in-out">
+          <p className="border border-gray-200 text-[44px] text-indigo-600 rounded-full w-20 h-20 flex items-center justify-center text-xl font-[800] hover:bg-indigo-600 hover:text-white transition-all duration-300 ease-in-out uppercase">
             {user.name.charAt(0).toUpperCase()}
           </p>
           <div>
