@@ -122,7 +122,7 @@ const Checkout = () => {
   return (
     <div className="container mx-auto px-4 py-8">
       <h1 className="text-3xl font-bold mb-8">Checkout</h1>
-      <p>Total price: {totalPrice}</p>
+      <h2 className="text-[36px] text-indigo-600 font-[900]">Total price: {totalPrice}</h2>
       <form onSubmit={handleSubmit} className="max-w-lg mx-auto">
         {/* Shipping Information Section */}
         <div className="mb-6">

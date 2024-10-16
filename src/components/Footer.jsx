@@ -21,7 +21,7 @@ return (
     <div className="w-300">
       <h1 className="oswald text-3xl mb-4">Our Mission</h1>
       <p className="text-sm text-custom-btn-gray">
-        At ArbSale, our mission is to revolutionize the way people 
+        At StoRedux, our mission is to revolutionize the way people 
         shop by providing a seamless and enjoyable online shopping 
         experience. We strive to be the go-to destination for customers 
         seeking convenience, quality, and variety in their purchases.
