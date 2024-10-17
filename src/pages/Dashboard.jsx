@@ -95,7 +95,6 @@ const Dashboard = () => {
               required
             >
               <option value="">Select role</option>
-              <option value="admin">Admin</option>
               <option value="seller">Seller</option>
               <option value="shopper">Shopper</option>
             </select>
@@ -146,7 +145,7 @@ const Dashboard = () => {
             <tbody>
               {displayedUsers?.map((user) => (
                 <>
-                  {user.id !== storeUser.id && (
+                  {user.id !== storeUser.id && user.role !== "admin" && (
                     <tr key={user.id} className="border-b">
                       <td className="p-2">{user.name}</td>
                       <td className="p-2">{user.email}</td>
