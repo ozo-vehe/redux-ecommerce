@@ -56,47 +56,6 @@ This project aims to create a scalable, performant, and easy-to-use eCommerce sy
 - **Routing**: React Router
   - Used for seamless page navigation between different components such as login, dashboard, product listings, and cart.
 
-
-## Installation and Setup
-
-### Backend Setup (Supabase)
-
-1. Go to [Supabase](https://supabase.com/) and create a project.
-2. Set up the database schema for users, products, and orders/carts.
-3. Retrieve your project API keys from Supabase and add them to the frontend `.env` file:
-   ```bash
-   VITE_SUPABASE_URL=<your-supabase-url>
-   VITE_SUPABASE_ANON_KEY=<your-supabase-anon-key>
-   ```
-4. Set up the following tables in Supabase:
-   - **Users**: Includes fields for username, email, password, and role (Admin, Seller, Shopper).
-   - **Products**: Includes fields for product name, price, quantity, seller ID, etc.
-   - **Carts**: Includes fields for product, user ID (shopper), and status.
-
-### Frontend Setup
-
-1. Clone the repository:
-   ```bash
-   git clone <repository-url>
-   cd frontend
-   ```
-
-2. Install dependencies:
-   ```bash
-   npm install
-   ```
-
-3. Start the frontend development server:
-   ```bash
-   npm run dev
-   ```
-
-4. Open your browser and visit `http://localhost:3000` to view the application.
-
-
-  > NOTE: The project should be run on a laptop and mobile view has not yet been implemented.
-
-
 ## State Management
 
 **Redux Toolkit** is used for handling global state. The state is divided into slices for each key area of the application:
@@ -112,6 +71,35 @@ The user interface is designed using **TailwindCSS**, which offers flexibility i
 Key styling features:
 - Minimalist design focusing on usability and product browsing.
 - Easy-to-read typography and color contrast for better accessibility.
+
+
+## Installation and Setup
+
+### Frontend Setup
+
+1. Clone the repository:
+   ```bash
+   git clone <repository-url>
+   cd redux-ecommerce
+   ```
+
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+3. Start the frontend development server:
+   ```bash
+   npm run dev
+   ```
+
+4. Open your browser and visit `http://localhost:5173` to view the application.
+
+5. Either signup up as a shopper or seller, or login as an admin using the admin details below.
+   > admin details => email: ozovehe@gmail.com, password: ozovehe
+
+   > NOTE: The project should be run on a laptop and mobile view has not yet been implemented.
+
 
 ## Conclusion
 
