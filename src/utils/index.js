@@ -3,6 +3,7 @@
  * @type {import('@supabase/supabase-js').SupabaseClient}
  */
 import supabase from "./supabase";
+import { AES, enc } from "crypto-js";
 
 /**
  * Retrieves uploaded cart items for a specific user.
@@ -112,4 +113,30 @@ export const addItem = async (products, userId) => {
     .select();
 
   return { data, error };
+};
+
+/**
+ * Encrypts a password using AES encryption.
+ * @param {string} password - The password to encrypt.
+ * @param {string} key - The encryption key.
+ * @returns {string} The encrypted password as a string.
+ */
+export const encrypt = (password, key) => {
+  const encrypted = AES.encrypt(password, key).toString();
+
+  return encrypted;
+};
+
+/**
+ * Decrypts an encrypted password using AES decryption.
+ * @param {string} encrypted - The encrypted password to decrypt.
+ * @param {string} key - The decryption key.
+ * @returns {string} The decrypted password as a UTF-8 string.
+ */
+export const decrypt = (encrypted, key) => {
+  const decrypted = AES.decrypt(encrypted, key).toString(
+    enc.Utf8
+  );
+
+  return decrypted;
 };

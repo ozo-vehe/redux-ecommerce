@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import supabase from "../../utils/supabase";
+import { decrypt } from "../../utils";
 
 const initialState = {
   users: [],
@@ -58,12 +59,13 @@ const usersSlice = createSlice({
   reducers: {
     setUser: (state, action) => {
       const { email, password } = action.payload;
+
       const user = state.users.find(
-        (user) => user.email === email && user.password === password
+        (user) => user.email === email && decrypt(user.password, user.email) === password
       );
 
       if (user) state.user = user;
-      else state.error = "User not found";
+      else alert("Invalid login details");
 
       state.isLoading = false;
     },

@@ -119,10 +119,9 @@ export default function Navbar() {
       {loggedUser?.id ? (
         <>
           <div className="relative">
-            <div className="border border-gray-200 text-custom-blue cursor-pointer hover:bg-custom-blue hover:text-white hover:border-custom-blue rounded-full transition-all duration-500 p-4 w-10 h-10 flex items-center justify-center">
+            <div className="border border-gray-200 text-custom-blue cursor-pointer hover:bg-custom-blue hover:text-white hover:border-custom-blue rounded-full transition-all duration-500 p-4 w-10 h-10 flex items-center justify-center" onClick={() => setDropdownOpen(!dropdownOpen)}>
               <span
                 className="rounded-full flex items-center justify-center text-xl font-[800]"
-                onClick={() => setDropdownOpen(!dropdownOpen)}
               >
                 {loggedUser.name.charAt(0).toUpperCase()}
               </span>

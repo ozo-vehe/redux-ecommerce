@@ -7,6 +7,7 @@ import {
   addNewUser,
   removeUser,
 } from "../features/users/usersSlice";
+import { encrypt } from "../utils";
 
 const Dashboard = () => {
   // Get users from the store
@@ -40,6 +41,7 @@ const Dashboard = () => {
       // Check if input fields are not empty
       if (newUser.name && newUser.email && newUser.password && newUser.role) {
         newUser.id = v4();
+        newUser.password = encrypt(newUser.password, newUser.email)
         dispatch(addNewUser(newUser));
 
         setNewUser({ id: "", name: "", email: "", role: "", password: "" });

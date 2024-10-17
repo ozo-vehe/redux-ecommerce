@@ -39,7 +39,7 @@ const Login = () => {
    * State for error messages
    * @type {[string, function]}
    */
-  const [error, setError] = useState("");
+  const [error, setError] = useState(useSelector((state) => state.users.error));
 
   /**
    * Hook for programmatic navigation

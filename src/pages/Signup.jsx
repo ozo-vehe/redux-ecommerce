@@ -20,6 +20,7 @@ import {
 } from "../features/users/usersSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { v4 } from "uuid";
+import { encrypt } from "../utils";
 
 const Signup = () => {
   // State variables
@@ -52,12 +53,13 @@ const Signup = () => {
     }
     setError("");
     try {
-      console.log(email, password, role);
+      const encryptedPassword = encrypt(password, email)
+
       const userDetails = {
         id: v4(),
         name: fullname,
         email: email,
-        password: password,
+        password: encryptedPassword,
         role: role,
       };
 
@@ -177,6 +179,7 @@ const Signup = () => {
                 <option value="">Select a role</option>
                 <option value="shopper">Shopper</option>
                 <option value="seller">Seller</option>
+                <option value="admin">Admin</option>
               </select>
             </div>
           </div>
