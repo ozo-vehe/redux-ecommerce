@@ -17,7 +17,7 @@ import image1 from '../assets/images/footer1.webp'
 
 export default function Footer() {
 return (
-  <footer className="bg-custom-dark-blue text-slate-200 flex flex-wrap items-start justify-center gap-8 max-w-[1440px] mx-auto py-8 px-[5%]">
+  <footer className="bg-custom-dark-blue text-slate-200 flex flex-wrap items-start justify-center gap-8 w-full py-8 px-[5%] border">
     <div className="w-300">
       <h1 className="oswald text-3xl mb-4">Our Mission</h1>
       <p className="text-sm text-custom-btn-gray">

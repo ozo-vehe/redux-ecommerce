@@ -17,6 +17,7 @@ import AddProduct from "./pages/AddProduct.jsx";
 import ContactUs from "./pages/ContactUs.jsx";
 import AboutUs from "./pages/AboutUs.jsx";
 import Profile from "./pages/Profile.jsx";
+import Product from "./pages/Product.jsx";
 
 
 store.dispatch(fetchUsers());
@@ -69,6 +70,10 @@ const router = createBrowserRouter([
         path: "/profile",
         element: <Profile />,
       },
+      {
+        path: "/products/:id",
+        element: <Product />,
+      },
     ],
   },
 ]);
@@ -78,6 +83,5 @@ ReactDOM.createRoot(document.getElementById("root")).render(
     <React.StrictMode>
       <RouterProvider router={router} />
     </React.StrictMode>
-    ,
   </Provider>
 );

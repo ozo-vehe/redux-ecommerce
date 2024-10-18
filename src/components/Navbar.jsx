@@ -70,36 +70,6 @@ export default function Navbar() {
               </NavLink>
             </li>
           ))}
-          {loggedUser?.id && (
-            <li className="hover:text-custom-blue">
-              <NavLink
-                className={({ isActive }) => isActive && "text-custom-blue"}
-                to={"/profile"}
-              >
-                Profile
-              </NavLink>
-            </li>
-          )}
-          {loggedUser?.role === "admin" && (
-            <li className="hover:text-custom-blue">
-              <NavLink
-                className={({ isActive }) => isActive && "text-custom-blue"}
-                to={"/dashboard"}
-              >
-                Dashboard
-              </NavLink>
-            </li>
-          )}
-          {loggedUser?.role === "seller" && (
-            <li className="hover:text-custom-blue">
-              <NavLink
-                className={({ isActive }) => isActive && "text-custom-blue"}
-                to={"/add-product"}
-              >
-                Upload Product
-              </NavLink>
-            </li>
-          )}
         </ul>
       </div>
 
@@ -119,15 +89,70 @@ export default function Navbar() {
       {loggedUser?.id ? (
         <>
           <div className="relative">
-            <div className="border border-gray-200 text-custom-blue cursor-pointer hover:bg-custom-blue hover:text-white hover:border-custom-blue rounded-full transition-all duration-500 p-4 w-10 h-10 flex items-center justify-center" onClick={() => setDropdownOpen(!dropdownOpen)}>
-              <span
-                className="rounded-full flex items-center justify-center text-xl font-[800]"
-              >
+            <div
+              className="border border-gray-200 text-custom-blue cursor-pointer hover:bg-custom-blue hover:text-white hover:border-custom-blue rounded-full transition-all duration-500 p-4 w-10 h-10 flex items-center justify-center"
+              onClick={() => setDropdownOpen(!dropdownOpen)}
+            >
+              <span className="rounded-full flex items-center justify-center text-xl font-[800]">
                 {loggedUser.name.charAt(0).toUpperCase()}
               </span>
             </div>
             {dropdownOpen && (
-              <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-10">
+              <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-20">
+                <ul className="text-sm text-gray-700 pt-2 pb-0">
+                  {loggedUser?.id && (
+                    <li className="hover:bg-gray-100 w-full px-4 py-2">
+                      <NavLink
+                        className={({ isActive }) =>
+                          isActive && "text-gray-800"
+                        }
+                        to={"/profile"}
+                        onClick={() => setDropdownOpen(!dropdownOpen)}
+                      >
+                        Profile
+                      </NavLink>
+                    </li>
+                  )}
+                  {loggedUser?.role === "admin" && (
+                    <>
+                      <li className="hover:bg-gray-100 w-full px-4 py-2">
+                        <NavLink
+                          className={({ isActive }) =>
+                            isActive && "text-gray-800"
+                          }
+                          to={"/dashboard"}
+                          onClick={() => setDropdownOpen(!dropdownOpen)}
+                        >
+                          Dashboard
+                        </NavLink>
+                      </li>
+                      <li className="hover:bg-gray-100 w-full px-4 py-2">
+                        <NavLink
+                          className={({ isActive }) =>
+                            isActive && "text-gray-800"
+                          }
+                          to={"/add-product"}
+                          onClick={() => setDropdownOpen(!dropdownOpen)}
+                        >
+                          Upload Product
+                        </NavLink>
+                      </li>
+                    </>
+                  )}
+                  {loggedUser?.role === "seller" && (
+                    <li className="hover:bg-gray-100 w-full px-4 py-2">
+                      <NavLink
+                        className={({ isActive }) =>
+                          isActive && "text-gray-800"
+                        }
+                        to={"/add-product"}
+                        onClick={() => setDropdownOpen(!dropdownOpen)}
+                      >
+                        Upload Product
+                      </NavLink>
+                    </li>
+                  )}
+                </ul>
                 <button
                   onClick={handleLogout}
                   className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full text-left"

@@ -18,7 +18,7 @@ const ContactUs = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     // Handle form submission logic here
-    console.log('Form submitted:', formData);
+    alert('Form submitted, we will get back to you in due time.');
     // Reset form after submission
     setFormData({ name: '', email: '', message: '' });
   };
@@ -73,7 +73,7 @@ const ContactUs = () => {
             <div className="flex items-center justify-center">
               <button
                 type="submit"
-                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                className="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline text-sm"
               >
                 Send Message
               </button>

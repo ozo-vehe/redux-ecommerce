@@ -65,7 +65,7 @@ const usersSlice = createSlice({
       );
 
       if (user) state.user = user;
-      else alert("Invalid login details");
+      else state.error = "invalid user";
 
       state.isLoading = false;
     },

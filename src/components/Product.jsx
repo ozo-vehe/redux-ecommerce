@@ -2,6 +2,7 @@ import PropTypes from "prop-types";
 // import { addToCart } from "../utils/cart";
 import { useSelector, useDispatch } from "react-redux";
 import { addToCart } from "../features/cart/cartSlice";
+import { Link } from "react-router-dom";
 
 export default function Product({ product }) {
   const cart = useSelector((state) => state.cart.cartItems);
@@ -37,16 +38,15 @@ export default function Product({ product }) {
             <div className="z-10 flex items-center justify-center absolute bottom-0 bg-white/70 w-full h-24 translate-y-16 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500">
               <div className="absolute flex gap-x-4 z-10">
                 <img
-                  className="icon p-3 w-10 h-10 bg-custom-blue/80 hover:bg-custom-blue duration-350 transition-all"
+                  className="icon p-3 w-10 h-10 bg-custom-blue/80 hover:bg-custom-blue duration-350 transition-all cursor-pointer"
                   src="https://img.icons8.com/material-outlined/24/ffffff/shopping-cart--v1.png"
                   alt="shopping-cart"
                   onClick={() => handleCart(product)}
                 />
-                {/* <img
-                  className="icon p-3 w-10 h-10 bg-custom-blue/80 hover:bg-custom-blue duration-350 transition-all"
-                  src="https://img.icons8.com/ios/50/ffffff/hearts--v1.png"
-                  alt="favourite"
-                /> */}
+                <Link to={`/products/${product.id}`}>
+                <img 
+                  className="icon p-3 w-10 h-10 bg-custom-blue/80 hover:bg-custom-blue duration-350 transition-all cursor-pointer" src="https://img.icons8.com/ios-glyphs/ffffff/30/info--v1.png" alt="info--v1"/>
+                </Link>
               </div>
             </div>
           </div>
@@ -69,21 +69,10 @@ export default function Product({ product }) {
       ) : (
         <p>Loading...</p>
       )}
-
-      {/* <div className="fixed z-20 top-0 left-0 w-full h-full bg-black/50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-500">
-        <div className="max-w-[400px] bg-white h-fit p-4 rounded-[8px] flex items-center gap-8">
-          <p>Login before you add items to cart</p>
-          <img
-            className="w-4 h-4 cursor-pointer"
-            src="https://img.icons8.com/ios-glyphs/30/delete-sign.png"
-            alt="delete-sign"
-          />
-        </div>
-      </div> */}
     </div>
   );
 }
 
 Product.propTypes = {
-  product: PropTypes.object,
+  product: PropTypes.object
 };
