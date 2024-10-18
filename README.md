@@ -7,8 +7,10 @@
 This project aims to create a scalable, performant, and easy-to-use eCommerce system that supports multiple user roles and offers seamless product management and purchasing capabilities.
 
 ## Demo
+- Video
 
-- Video: [Video](https://www.loom.com/share/9b5711ecf89e4060a10277d2ff57f9b8?sid=29d11325-20fb-41e6-bf42-df306dcf7b2c)
+https://github.com/user-attachments/assets/5a542fde-55ae-462c-9aba-8351e0daf684
+
 - Website: [StoRedux](https://storedux-ten.vercel.app/)
 
 ## Features
@@ -95,10 +97,10 @@ Key styling features:
 
 4. Open your browser and visit `http://localhost:5173` to view the application.
 
-5. Either signup up as a shopper or seller, or login as an admin using the admin details below.
-   > admin details => email: ozovehe@gmail.com, password: ozovehe
+5. Either sign up as a shopper or seller or log in as an admin using the admin details below.
+   > admin_1 details => email: ozovehe@gmail.com, password: ozovehe
 
-   > NOTE: The project should be run on a laptop and mobile view has not yet been implemented.
+   > NOTE: The project should be run on a laptop as the mobile view has not yet been implemented.
 
 
 ## Conclusion
